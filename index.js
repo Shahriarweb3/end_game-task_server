@@ -171,13 +171,14 @@ const run = async () => {
       res.send(insertResult);
     });
     // ############## UPDATE ROLE FOR USERS ############
-    app.put("/user/admin", async (req, res) => {
-      const email = req.body.email;
-      const filter = { email: email };
-      const updateDoc = { $set: { role: "admin" } };
+    app.put('/users/admin', async (req, res) => {
+      const admin = req.body;
+      console.log('put', admin);
+      const filter = { email: admin.email };
+      const updateDoc = { $set: { role: 'admin' } };
       const result = await usersCollection.updateOne(filter, updateDoc);
-      res.send(result);
-    });
+      res.json(result);
+    })
 
     // ############# UPDATE ORDER STATUS DONE #################
     app.put("/postLike/:id", async (req, res) => {
